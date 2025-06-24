@@ -1,0 +1,1 @@
+using german_1_STUDENTH01Srv as service from '../../srv/service';
