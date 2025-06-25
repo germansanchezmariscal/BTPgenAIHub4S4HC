@@ -17,7 +17,9 @@
     "@sap/xssec": "^4.8.0",
     "express": "^4",
     "hdb": "^0.19.12",
-    "passport": "^0.7.0"
+    "passport": "^0.7.0",
+    "@sap-cloud-sdk/connectivity": "^3",
+    "@sap-cloud-sdk/resilience": "^3"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
@@ -29,7 +31,8 @@
     "start-local": "npm run generate-entry-point && npm run cds-watch",
     "generate-entry-point": "dev-cap-tools gen-entrypoint",
     "cds-watch": "cds watch --open",
-    "watch-german_1_studenth01.customermessages": "cds watch --open german_1_studenth01.customermessages/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-german_1_studenth01.customermessages": "cds watch --open german_1_studenth01.customermessages/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-german_1_studenth01.productfaqapp": "cds watch --open german_1_studenth01.productfaqapp/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "sql": {
@@ -47,11 +50,23 @@
         "[production]": {
           "kind": "xsuaa"
         }
+      },
+      "S4HCP_ServiceOrder_Odata": {
+        "kind": "odata-v2",
+        "csrf": true,
+        "csrfInBatch": true,
+        "model": "srv/external/S4HCP_ServiceOrder_Odata",
+        "[production]": {
+          "credentials": {
+            "destination": "S4HCP-ServiceOrder-Odata"
+          }
+        }
       }
     }
   },
   "lcap": true,
   "sapux": [
-    "app/german_1_studenth01.customermessages"
+    "app/german_1_studenth01.customermessages",
+    "app/german_1_studenth01.productfaqapp"
   ]
 }

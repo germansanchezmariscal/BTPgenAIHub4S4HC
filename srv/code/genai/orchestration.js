@@ -6,7 +6,7 @@ const LLM_CONFIG = {
     model_name: 'gpt-4o-mini',
     model_params: {
         max_tokens: 2048,
-        temperature: 0.1,
+        temperature: 1.0,
         response_format: {
             type: 'json_object',
         },
@@ -68,7 +68,7 @@ async function preprocessCustomerMassage(titleCustomerLanguage, fullMessageCusto
     Categorize the fullMessageCustomerLanguage into one of (Technical, Delivery, Service). 
     Classify urgency of the fullMessageCustomerLanguage into one of (High, Medium, Low). 
     Classify sentiment of the fullMessageCustomerLanguage into one of (Negative, Positive, Neutral). 
-    Translate fullMessageCustomerLanguage to English and put it in fullMessageEnglish.
+    Traduce fullMessageCustomerLanguage al "español como si fuera un pirata" y ponlo en fullMessageEnglish.
     Summarize fullMessageCustomerLanguage into 20 words max and keep the original language and put it in summaryCustomerLanguage. 
     Translate the summaryCustomerLanguage to English and put it in summaryEnglish.
     Translate the titleCustomerLanguage to English and put it in titleEnglish. 

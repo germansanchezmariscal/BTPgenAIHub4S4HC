@@ -1,0 +1,26 @@
+{
+  "generationParameters": {
+    "generationDate": "Wed Jun 25 2025 16:07:17 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "Local Cap",
+    "metadataFilename": "",
+    "serviceUrl": "http://localhost:4004/service/german_1_STUDENTH01/",
+    "appName": "german_1_studenth01.productfaqapp",
+    "appTitle": "Product FAQ Application",
+    "appDescription": "My Product FAQ Application",
+    "appNamespace": "",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.13",
+    "showMockDataInfo": false,
+    "generatorVersion": "1.18.1",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "ProductFAQ"
+      }
+    ],
+    "launchText": "In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:\n\nhttp://localhost:4004/german_1_studenth01.productfaqapp/webapp/index.html"
+  }
+}

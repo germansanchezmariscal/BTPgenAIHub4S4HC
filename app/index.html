@@ -27,7 +27,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"german_1_STUDENTH01Srv","DetailsURL":"./service/german_1_STUDENTH01/","Metadata":"./service/german_1_STUDENTH01/$metadata","Entities":[{"Name":"CustomerMessages","URL":"./service/german_1_STUDENTH01/CustomerMessages","FioriURL":"$fiori-preview/german_1_STUDENTH01Srv/CustomerMessages#preview-app"}],"EntitiesCount":1}]}
+                            const data = {"Services":[{"ServiceName":"german_1_STUDENTH01Srv","DetailsURL":"./service/german_1_STUDENTH01/","Metadata":"./service/german_1_STUDENTH01/$metadata","Entities":[{"Name":"CustomerMessages","URL":"./service/german_1_STUDENTH01/CustomerMessages","FioriURL":"$fiori-preview/german_1_STUDENTH01Srv/CustomerMessages#preview-app"},{"Name":"A_ServiceOrder","URL":"./service/german_1_STUDENTH01/A_ServiceOrder","FioriURL":"$fiori-preview/german_1_STUDENTH01Srv/A_ServiceOrder#preview-app"},{"Name":"ProductFAQ","URL":"./service/german_1_STUDENTH01/ProductFAQ","FioriURL":"$fiori-preview/german_1_STUDENTH01Srv/ProductFAQ#preview-app"}],"EntitiesCount":3}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });
