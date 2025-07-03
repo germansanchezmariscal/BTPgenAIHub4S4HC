@@ -104,11 +104,13 @@ module.exports = {
 
 
 
-async function generateResponseTechMessage(fullMessageCustomerLanguage) {
-    // Constructs a prompt to generate a response for a technical message based on given FAQ items, customer issue, and message.
+async function generateResponseTechMessage(issue, question, answer, fullMessageCustomerLanguage, soContext) {
+    // Define a prompt that provides the context for generating a technical response
     const prompt = `
-    Generate a helpful reply to the following customer message:
+    Generate a helpful reply message including the troubleshooting procedure to the newCustomerMessage based on previousCustomerMessages and relevantFAQItem:
+    relevantFAQItem: issue - {{?issue}}, Question - {{?question}} and Answer - {{?answer}}
     newCustomerMessage: {{?fullMessageCustomerLanguage}}
+    previousCustomerMessages: {{?soContext}}
     Produce the reply in two languages: in the original language of newCustomerMessage and in English. Return the result in the following JSON template:
     {
         suggestedResponseEnglish: Text,
@@ -116,25 +118,28 @@ async function generateResponseTechMessage(fullMessageCustomerLanguage) {
     }`;
 
     try {
-        // Creates an orchestration client to handle the prompt.
+        // Create orchestration client using the generated prompt
         const orchestrationClient = await createOrchestrationClient(prompt);
+        // Get the response by providing the required input parameters
         const response = await orchestrationClient.chatCompletion({
-            inputParams: {fullMessageCustomerLanguage }
+            inputParams: { issue, question, answer, fullMessageCustomerLanguage, soContext }
         });
+        // Parse and return the generated response in JSON format
         return JSON.parse(response.getContent());
     } catch (error) {
-        // Logs an error if the response generation fails and throws a new error.
+        // Log an error message and re-throw an error if response generation fails
         LOG.error('Error generating tech message response:', error);
         throw new Error('Response generation service failed.');
     }
 }
 
-async function generateResponseOtherMessage(messageSentiment, fullMessageCustomerLanguage) {
-    // Constructs a prompt to generate either an apology or gratitude message based on the sentiment of the customer's message.
+async function generateResponseOtherMessage(messageSentiment, fullMessageCustomerLanguage, soContext) {
+    // Determine message type based on customer sentiment (either an apology or a thank you note)
     const messageType = messageSentiment === 'Negative' ? 'a "we are sorry" note' : 'a gratitude note';
     const prompt = `
-    Generate {{?messageType}} to the newCustomerMessage:
+    Generate {{?messageType}} to the newCustomerMessage base on prevoiuse customer messages previousCustomerMessages. 
     newCustomerMessage: {{?fullMessageCustomerLanguage}}
+    previousCustomerMessages: {{?soContext}}
     Produce the reply in two languages: in the original language of newCustomerMessage and in English. Return the result in the following JSON template:
     {
         suggestedResponseEnglish: Text,
@@ -142,14 +147,16 @@ async function generateResponseOtherMessage(messageSentiment, fullMessageCustome
     }`;
 
     try {
-        // Creates an orchestration client to handle the prompt.
+        // Create orchestration client using the generated prompt
         const orchestrationClient = await createOrchestrationClient(prompt);
+        // Get the response by providing the required input parameters
         const response = await orchestrationClient.chatCompletion({
-            inputParams: { messageType, fullMessageCustomerLanguage }
+            inputParams: { messageType, fullMessageCustomerLanguage, soContext }
         });
+        // Parse and return the generated response in JSON format
         return JSON.parse(response.getContent());
     } catch (error) {
-        // Logs an error if the response generation fails and throws a new error.
+        // Log an error message and re-throw an error if response generation fails
         LOG.error('Error generating other message response:', error);
         throw new Error('Response generation service failed.');
     }
